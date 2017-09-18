@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="page-header mt-5">Lastest Todo</h2>
+    {% if list_todo|length != 0  %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Todo</th>
+                    <th>Due Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in list_todo %}
+                <tr>
+                    <th scope="row">{{ todo.id }}</th>
+                    <td>{{ todo.name }}</td>
+                    <td>{{ todo.dueDate|date("Y/m/d") }}</td>
+                    <td>
+                        <a href="/todo/details/{{ todo.id }}" class="btn btn-outline-success">View</a>
+                        <a href="/todo/edit/{{ todo.id }}" class="btn btn-outline-secondary">Edit</a>
+                        <a href="/todo/delete/{{ todo.id }}" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div>No items</div>
+    {% endif %}
+
+{% endblock %}
